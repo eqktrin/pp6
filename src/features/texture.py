@@ -12,7 +12,6 @@ def extract_texture_features(rgb: np.ndarray, mask: np.ndarray, return_names: bo
     gray = cv2.cvtColor(rgb, cv2.COLOR_RGB2GRAY)
     gray_masked = gray * (mask > 0)
 
-    # Избегаем ошибок на пустых изображениях
     if gray_masked.max() == 0:
         return [0.0, 0.0]
 
