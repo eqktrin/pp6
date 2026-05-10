@@ -1,0 +1,16 @@
+paths:
+  raw_data: "D:/3lol/pp6/data/Elsafty_RBCs_for_Classification"
+  processed: "data/processed"
+  reports: "outputs/reports"
+  annotations: ""             
+
+extractor:
+  version: "v1.0"
+  n_features: 22
+  include_glcm: true
+  include_histogram: true
+  random_state: 42
+
+build:
+  n_jobs: -1
+  test_size: 0.2

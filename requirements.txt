@@ -1,0 +1,12 @@
+numpy>=1.24
+pandas
+pillow
+opencv-python-headless
+scikit-image
+scikit-learn
+xgboost
+tqdm
+joblib
+pyyaml
+seaborn
+matplotlib
