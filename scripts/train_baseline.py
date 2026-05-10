@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 import joblib
 from pathlib import Path
 
-# Загрузка данных
 X = np.load("data/processed/X.npy")
 y = np.load("data/processed/y.npy")
 feature_names = joblib.load("data/processed/feature_names.pkl")
@@ -28,14 +27,14 @@ model = xgb.XGBClassifier(
 
 print("Обучение XGBoost...")
 model.fit(X_train, y_train)
+model.save_model("xgb_anomaly_model.json")
+print("Модель сохранена в xgb_anomaly_model.json")
 
-# Оценка
 preds = model.predict(X_test)
 print("\n" + "="*50)
 print(classification_report(y_test, preds, target_names=['Норма', 'Аномалия']))
 print("="*50)
 
-# Feature importance
 importance = model.feature_importances_
 top_features = sorted(zip(feature_names, importance), key=lambda x: x[1], reverse=True)[:15]
 
@@ -43,7 +42,6 @@ print("\nТоп-15 важных признаков:")
 for name, imp in top_features:
     print(f"{name:25} {imp:.4f}")
 
-# Сохранение отчёта
 Path("outputs/reports").mkdir(parents=True, exist_ok=True)
 plt.figure(figsize=(8,6))
 sns.heatmap(confusion_matrix(y_test, preds), annot=True, fmt='d', cmap='Blues')
